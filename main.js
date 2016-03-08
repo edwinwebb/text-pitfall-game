@@ -16,15 +16,15 @@ var game = {
 var characters = {
     wall : '▓',
     hole : ' ',
-    man : '☺',
-    deadMan : '☹',
+    man : '😁',
+    deadMan : '😖',
     cherry : '$'
 }
 
 var currentKey = false; // Left or right key
 var manPosition = game.width / 2;
 var gapWidth = game.width * game.gap; // gap to fall down
-var gapOffset = gapWidth / 2; 
+var gapOffset = gapWidth / 2;
 var gapOffsetVaiance = 2; // gap modifier
 var wallArray = makeInitalWallArray();
 var textArea = document.querySelector('#game');
@@ -36,9 +36,9 @@ function makeInitalWallArray() {
     var bottom = Array
                 .apply(0, Array(10))
                 .map(function() { return [gapOffset,gapWidth] })
-    
+
     return top.concat(bottom)
-        
+
 }
 
 /**
@@ -134,7 +134,7 @@ String.prototype.replaceAt = function(index, character) {
 }
 
 window.addEventListener('keydown', function(e) {
-    
+
     var kk = e.keyCode;
 
     // left
