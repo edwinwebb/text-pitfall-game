@@ -1,7 +1,7 @@
 
 // Game Options
 var game = {
-    speed : 100,
+    speed : 30,
     width: 56,
     height: 46,
     score: 0,
@@ -32,13 +32,12 @@ var textArea = document.querySelector('#game');
 function makeInitalWallArray() {
     var top = Array
                 .apply(0, Array(game.height - 10))
-                .map(function() { return [0,game.width] })
+                .map(function() { return [0,game.width] });
     var bottom = Array
                 .apply(0, Array(10))
-                .map(function() { return [gapOffset,gapWidth] })
+                .map(function() { return [gapOffset,gapWidth] });
 
     return top.concat(bottom)
-
 }
 
 /**
@@ -53,6 +52,12 @@ function render() {
     var newOffset = Math.random() > .5 ? gapOffset + gapOffsetVaiance : gapOffset - gapOffsetVaiance;
     var endGame = false;
 
+    /**
+     * Makes a line of text from array generation and joins
+     * @param  {num} gapOffset gap position
+     * @param  {num} gapWidth  gap size
+     * @return {String}        current wall state
+     */
     function drawWall(gapOffset, gapWidth) {
         var go = gapOffset;
         var gw = gapWidth;
@@ -113,7 +118,9 @@ function render() {
     }
 }
 
-// Increase difficulty
+/**
+ * Update game settings mid render cycle
+ */
 function levelCheck() {
     if(game.tick > 0 && game.tick % 100 == 0 && gapWidth > 8) {
         gapWidth -= 2;
@@ -128,11 +135,12 @@ function levelCheck() {
     }
 }
 
-// Needed in render
+// Needed in render, could be better :/
 String.prototype.replaceAt = function(index, character) {
     return this.substr(0, index) + character + this.substr(index+character.length);
 }
 
+// Record keypresses
 window.addEventListener('keydown', function(e) {
 
     var kk = e.keyCode;
